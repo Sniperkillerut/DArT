@@ -1,0 +1,326 @@
+﻿<Window x:Class="DArT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DArT"
+        mc:Ignorable="d"
+        Title="DArT" Height="720" Width="300" AllowsTransparency="True" WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="CanResizeWithGrip" Background="#FF13111C" Topmost="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" MinWidth="268" MinHeight="504" UseLayoutRounding="True" SnapsToDevicePixels="True" Loaded="Window_Loaded" Icon="Resources/logo.ico">
+    <Window.Resources>
+        <BitmapImage x:Key="timer" UriSource="Resources/Timer.png" />
+        <BitmapImage x:Key="timerO" UriSource="Resources/Timer over.png" />
+        <BitmapImage x:Key="timerS" UriSource="Resources/Time Selected.png" />
+        <BitmapImage x:Key="timerSO" UriSource="Resources/Time Selected over.png" />
+
+        <BitmapImage x:Key="util" UriSource="Resources/Boton largo base.png" />
+        <BitmapImage x:Key="utilO" UriSource="Resources/Boton largo base over.png" />
+        <BitmapImage x:Key="utilS" UriSource="Resources/Boton largo base Selected.png" />
+        <BitmapImage x:Key="utilSO" UriSource="Resources/Boton largo base Selected over.png" />
+        
+        <Style x:Key="timerbutton" TargetType="ToggleButton">
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{DynamicResource timer}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{DynamicResource timerO}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{DynamicResource timerS}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.3">
+                    </Setter>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsChecked" Value="True" />
+                        <Condition Property="IsMouseOver" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <ImageBrush ImageSource="{DynamicResource timerSO}" />
+                            </Setter.Value>
+                        </Setter>
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="timerbuttontext" TargetType="ContentControl">
+            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="/DArT;component/Resources/#Continuum Light" />
+        </Style>
+
+        <Style x:Key="utilbutton" TargetType="Button">
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="False">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{DynamicResource util}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{DynamicResource utilO}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{DynamicResource utilS}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsPressed" Value="True" />
+                        <Condition Property="IsMouseOver" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <ImageBrush ImageSource="{DynamicResource utilSO}" />
+                            </Setter.Value>
+                        </Setter>
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="labeltext" TargetType="Label">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Foreground" Value="#FF888888" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="/DArT;component/Resources/#Continuum Light" />
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="FontFamily" Value="/DArT;component/Resources/#Continuum Medium" />
+
+        </Style>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Button x:Name="Btn_Close" Height="20" Width="20" Grid.Column="2" Grid.Row="0" Click="Btn_Close_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Margin" Value="0,0,0,0" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Background" Value="{x:Null}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF841134"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Label x:Name="close" Content="X" >
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="BorderBrush" Value="{x:Null}"/>
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Margin" Value="0,0,0,0" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="Foreground" Value="#FF888888" />
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="FontFamily" Value="/DArT;component/Resources/#Continuum Medium" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <!--Image x:Name="closeimg" Source="Resources/media-05.png" UseLayoutRounding="True" HorizontalAlignment="Center" VerticalAlignment="Center" /-->
+        </Button>
+        <Image x:Name="logo" Grid.Column="1" Margin="0" Grid.Row="1" Source="Resources/DArT logo.png"/>
+        <Grid Grid.Column="1" Grid.Row="3" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="67" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+
+            <Button Style="{StaticResource utilbutton}" x:Name="Btn_SF" Grid.Column="0" Grid.Row="0" Click="Btn_SF_Click" >
+                <Viewbox Stretch="Uniform">
+                    <ContentControl Content="    Select Files    " Style="{StaticResource timerbuttontext}" />
+                </Viewbox>
+            </Button>
+
+            <Label x:Name="FolderDir" Content="File Directory" Grid.Row="1" Style="{StaticResource labeltext}"/>
+            <Label x:Name="FileCount" Content="### Files" Grid.Row="2" Style="{StaticResource labeltext}"/>
+            <Label x:Name="OveralTime" Content="Overal Time:" Grid.Row="3" Style="{StaticResource labeltext}"/>
+
+            <Grid Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ToggleButton Style="{StaticResource timerbutton}" x:Name="Btn_30s" Grid.Column="0" Grid.Row="0" Click="Btn_30s_Click">
+                    <Viewbox Stretch="Uniform">
+                        <ContentControl Content="  30s  " Style="{StaticResource timerbuttontext}" />
+                    </Viewbox>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource timerbutton}" x:Name="Btn_1m" Grid.Column="1" Grid.Row="0" Click="Btn_1m_Click">
+                    <Viewbox Stretch="Uniform">
+                        <ContentControl Content="  1m  " Style="{StaticResource timerbuttontext}"/>
+                    </Viewbox>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource timerbutton}" x:Name="Btn_5m" Grid.Column="2" Grid.Row="0" Click="Btn_5m_Click">
+                    <Viewbox Stretch="Uniform">
+                        <ContentControl Content="  5m  " Style="{StaticResource timerbuttontext}"/>
+                    </Viewbox>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource timerbutton}" x:Name="Btn_10m" Grid.Column="3" Grid.Row="0" Click="Btn_10m_Click">
+                    <Viewbox Stretch="Uniform">
+                        <ContentControl Content=" 10m " Style="{StaticResource timerbuttontext}"/>
+                    </Viewbox>
+                </ToggleButton>
+                <ToggleButton Style="{StaticResource timerbutton}" x:Name="Btn_free" Grid.Column="4" Grid.Row="0" Click="Btn_free_Click">
+                    <Viewbox Stretch="Uniform">
+                        <ContentControl Content=" Free " Style="{StaticResource timerbuttontext}"/>
+                    </Viewbox>
+                </ToggleButton>
+            </Grid>
+        </Grid>
+
+        <Button Style="{StaticResource utilbutton}" x:Name="Btn_Start" Grid.Column="1" Grid.Row="6" Click="Btn_Start_Click">
+            <Viewbox Stretch="Uniform">
+                <ContentControl Content="        Start        " Style="{StaticResource timerbuttontext}" FontFamily="/DArT;component/Resources/#Continuum Medium" />
+            </Viewbox>
+        </Button>
+        <Grid Grid.Column="1" Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="Btn_Contact" Grid.Column="0" Grid.Row="0" Click="Btn_Contact_Click" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="/DArT;component/Resources/#Continuum Light" BorderThickness="0" Margin="0" VerticalAlignment="Center" Padding="1">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Label x:Name="contact" Content="Contact Us" Margin="0,0,0,0" Foreground="#FF888888" FontSize="12" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="/DArT;component/Resources/#Continuum Light" VerticalAlignment="Stretch" FontWeight="Bold" Padding="0"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                <Button x:Name="Btn_Edefex" Click="Btn_Edefex_Click" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontFamily="/DArT;component/Resources/#Continuum Light" BorderThickness="0" Margin="0" VerticalAlignment="Top" Padding="1">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Label x:Name="edefex" Content="Edefex" Margin="0,0,0,0" Foreground="#FF888888" FontSize="12" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="/DArT;component/Resources/#Continuum Light" VerticalAlignment="Stretch" FontWeight="Bold" Padding="0"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Label x:Name="sepa" Content="   -   " Margin="0,0,0,0" Foreground="#FF888888" FontSize="12" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="/DArT;component/Resources/#Continuum Light" VerticalAlignment="Stretch" FontWeight="Bold" Padding="0" />
+                <Button x:Name="Btn_Sniperkillerut" Click="Btn_Sniperkillerut_Click" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontFamily="/DArT;component/Resources/#Continuum Light" BorderThickness="0" Margin="0" VerticalAlignment="Top" Padding="1" >
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Label x:Name="sniperkillerut" Content="Sniperkillerut" Margin="0,0,0,0" Foreground="#FF888888" FontSize="12" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="/DArT;component/Resources/#Continuum Light" VerticalAlignment="Stretch" FontWeight="Bold" Padding="0"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>
